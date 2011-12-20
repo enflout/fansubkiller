@@ -1,6 +1,7 @@
 package ru.fansubkiller.search;
 
 import ru.fansubkiller.content.SearchResult;
+import ru.fansubkiller.web.WebUtil;
 
 import java.util.List;
 
@@ -8,9 +9,11 @@ import java.util.List;
  * @author i.orlov
  */
 public class ToshokanTracker extends Tracker {
-
-  public List<SearchResult> search(String searchText) {
-    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  public List<SearchResult> search(String searchRequest) {
+    String pageHref = formSearchURL(searchRequest);
+    String pageText = WebUtil.getHttpText(pageHref);
+    ToshokanParser parser = new ToshokanParser();
+    return parser.getResults(pageText);
   }
 
   @Override

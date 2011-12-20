@@ -44,4 +44,30 @@ public class SearchResult {
   public void setAdded(Date added) {
     this.added = added;
   }
+
+  @Override
+  public int hashCode() {
+    int result = 17;
+    result = 37 * result + name.hashCode();
+    result = 37 * result + href.hashCode();
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (!(o instanceof SearchResult)) {
+      return false;
+    }
+    SearchResult sr = (SearchResult) o;
+    return this.name.equals(sr.name) && this.href.equals(sr.href);
+  }
+
+  @Override
+  public String toString() {
+    return name + " - " + href;
+  }
+
 }
