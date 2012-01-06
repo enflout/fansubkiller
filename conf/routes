@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                                       SearchController.index
+GET     /                                       Application.index
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
-GET     /search                                 SearchController.index
+GET     /search                                 Application.search
