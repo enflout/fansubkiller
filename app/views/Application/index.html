@@ -1,0 +1,19 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div class="block">
+  <div id="search">
+    <form name="input" action="/search" method="get">
+      <input type="text" id="searchText" name="searchText" size="78" maxlength="100"/>
+      <input type="submit" value="Search"/>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    sessvars.$.clearMem();
+  });
+</script>
+
+

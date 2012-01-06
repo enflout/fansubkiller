@@ -1,0 +1,140 @@
+#{extends 'main.html' /}
+#{set title:'Search' /}
+
+<div class="block">
+  <div id="search">
+    <form name="input" action="/search" method="get">
+      <input type="text" id="searchText" name="searchText" size="78" maxlength="100"/>
+      <input type="submit" id="submit" value="Search"/>
+    </form>
+  </div>
+
+  <div class="result">
+    #{if results}
+      #{list items:results, as:'searchResult'}
+        <a href="${searchResult.href}">${searchResult.name}</a><br/>
+      #{/list}
+      Total count: ${results.size() + 1}
+    #{/if}
+  </div>
+</div>
+<div id="add">
+  #{list items: tasks, as: 'task'}
+    <div class="task">
+      <a href="@{Tasks.editTask(task.id)}">${task.text}</a>
+      <a href="@{Tasks.deleteTask(task.id)}">delete</a>
+    </div>
+  #{/list}
+  Add task
+  #{if flash.error}
+    <strong> (${flash.error})</strong>
+  #{/if}
+  #{form @Tasks.addTask()}
+    <div>
+      text:<br/>
+      <input type="text" id="taskSearchText" name="task.text" maxlength="100"/>
+      <img id="clear-task-search-text" alt="clear" src="@{'/public/images/delete.png'}"/>
+      <img id="copy-from-search-pane-button" alt="copy" src="@{'/public/images/copy-forward.png'}"/>
+    </div>
+    <div>
+      e-mail:<br/>
+      <input type="text" id="taskEmail" name="task.email" maxlength="30"/>
+      <img id="clear-task-search-email" alt="clear" src="@{'/public/images/delete.png'}"/>
+    </div>
+    <div>
+      timeout (in mins):<br/>
+      <input type="text" id="taskTimeout" name="task.timeout" maxlength="5"/>
+      <img id="clear-task-search-timeout" alt="clear" src="@{'/public/images/delete.png'}"/>
+    </div>
+    <div class="button" id="add-task-button">
+      <input type="submit" value="Add"/>
+      </div>
+    <div class="button">
+      <input type="reset" value="Reset" id="clear-task-button"/>
+    </div>
+  #{/form}
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $('#searchText').val(sessvars.search);
+  if (sessvars.task) {
+    var task = sessvars.task;
+    var text = $('#taskSearchText').val(task.text);
+    var email = $('#taskEmail').val(task.email);
+    var timeout = $('#taskTimeout').val(task.timeout);
+  }
+
+  var search = function() {
+
+  };
+
+  function memorizeSearch() {
+    sessvars.search = $('#searchText').val();
+  }
+
+  function memorizeTask() {
+    sessvars.task = getTask();
+  }
+
+  function getTask() {
+    var text = $('#taskSearchText').val();
+    var email = $('#taskEmail').val();
+    var timeout = $('#taskTimeout').val();
+    return {"text" : text, "email" : email, "timeout" : timeout};
+  }
+
+  $(document).ready(function() {
+    $('#searchText').bind('keyup', function() {
+      $('#taskSearchText').val($('#searchText').val());
+      $("#taskSearchText").trigger("change");
+      memorizeSearch();
+      search();
+    });
+    $('#taskSearchText').bind('keyup', function() {
+      memorizeTask();
+    });
+    $('#taskSearchText').bind('change', function() {
+      memorizeTask();
+    });
+    $('#taskEmail').bind('keyup', function() {
+      memorizeTask();
+    });
+    $('#taskTimeout').bind('keyup', function() {
+      memorizeTask();
+    });
+
+
+    addClearActions();
+    $('#copy-from-search-pane-button').bind('click', function() {
+      $('#taskSearchText').val($('#searchText').val());
+      $("#taskSearchText").trigger("change");
+    });
+
+    $('#clear-task-button').bind('click', function() {
+      // to default
+      // todo: request defaults!
+      $('#taskSearchText').val("");
+      $('#taskEmail').val("");
+      $("#taskTimeout").val("");
+    });
+  });
+
+  function addClearActions() {
+    $('#clear-task-search-text').bind('click', function() {
+      clearField('taskSearchText');
+    });
+    $('#clear-task-search-email').bind('click', function() {
+      clearField('taskEmail');
+    });
+    $('#clear-task-search-timeout').bind('click', function() {
+      clearField('taskTimeout');
+    });
+  }
+
+  function clearField(id) {
+    $('#' + id).val("");
+  }
+
+</script>
+
+

@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+#{set title:'Confirm "' + task.text + '" task' /}
+
+  #{form @saveTask()}
+    <input type="text" name="task.id" value="${task?.id}"/>
+    <p>
+      <strong>text:</strong> <input type="text" name="task.text" maxlength="100" value="${task?.text}"/>
+      <span class="error">${errors.forKey('task.text')}</span>
+    </p>
+    <p>
+      <strong>e-mail:</strong> <input type="text" name="task.email" maxlength="30" value="${task?.email}"/>
+      <span class="error">${errors.forKey('task.email')}</span>
+    </p>
+    <p>
+      <strong>timeout (in mins):</strong> <input type="text" name="task.timeout" maxlength="5" value="${task?.timeout}"/>
+      <span class="error">${errors.forKey('task.timeout')}</span>
+    </p>
+    <p class="buttons">
+      <input type="submit" value="Apply"> 
+      <a href='@{Application.search("")}'>Cancel</a>    
+    </p>
+  #{/form}
+
+<script type="text/javascript" charset="utf-8">
+</script>
+
+
