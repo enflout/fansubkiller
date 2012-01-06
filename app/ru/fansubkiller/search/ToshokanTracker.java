@@ -1,8 +1,9 @@
 package ru.fansubkiller.search;
 
 import ru.fansubkiller.content.SearchResult;
-import ru.fansubkiller.web.WebUtil;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -10,10 +11,15 @@ import java.util.List;
  */
 public class ToshokanTracker extends Tracker {
   public List<SearchResult> search(String searchRequest) {
-    String pageHref = formSearchURL(searchRequest);
-    String pageText = WebUtil.getHttpText(pageHref);
-    ToshokanParser parser = new ToshokanParser();
-    return parser.getResults(pageText);
+    try {
+      String pageHref = formSearchURL(searchRequest);
+      URL url = new URL(pageHref);
+      ToshokanParser parser = new ToshokanParser();
+      return parser.getResults(url);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override
