@@ -49,11 +49,11 @@ public class ToshokanParserTest {
     Document doc = documentBuilder.newDocument();
     Element root = doc.createElement("root");
     doc.appendChild(root);
-    Element element = getXMLResult(doc, "http://firstSecond.ru", "First, ", "second, ", "third.");
+    Element element = createXMLElement(doc, "http://firstSecond.ru", "First, ", "second, ", "third.");
     root.appendChild(element);
-    Element element2 = getXMLResult(doc, "http://chiDe.ru", "Chip ", "and ", "Deil.");
+    Element element2 = createXMLElement(doc, "http://chiDe.ru", "Chip ", "and ", "Deil.");
     root.appendChild(element2);
-    Element element3 = getXMLResult(doc, "http://oneTwoThree.ru", "1 ", "2 ", "3.");
+    Element element3 = createXMLElement(doc, "http://oneTwoThree.ru", "1 ", "2 ", "3.");
     root.appendChild(element3);
 
     NodeList nodeList = root.getChildNodes();
@@ -65,7 +65,7 @@ public class ToshokanParserTest {
     assertEquals(expectedResults, actualResults);
   }
 
-  private Element getXMLResult(Document doc, String href, String... titles) {
+  private Element createXMLElement(Document doc, String href, String... titles) {
     Element result = doc.createElement("a");
     result.setAttribute("href", href);
     for (String title : titles) {

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class ToshokanTrackerTest {
   @Test
-  public void formSearchURL() {
+  public void searchURLShouldBeInToshokanStyle() {
     String searchText = "Harry Potter 03";
     ToshokanTracker tracker = new ToshokanTracker();
     String searchURL = tracker.formSearchURL(searchText);

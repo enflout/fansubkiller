@@ -12,7 +12,7 @@ public abstract class Tracker {
     return withSpaces.replace(' ', '+');
   }
 
-  public abstract List<SearchResult> search(String searchText);
+  public abstract List<SearchResult> search(String searchedText);
   public abstract String getSearchEngineURL();
-  public abstract String formSearchURL(String searchRequest);
+  public abstract String formSearchURL(String searchedText);
 }

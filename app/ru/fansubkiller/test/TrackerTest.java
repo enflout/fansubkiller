@@ -1,6 +1,5 @@
 package ru.fansubkiller.test;
 
-import ru.fansubkiller.search.ToshokanTracker;
 import ru.fansubkiller.search.Tracker;
 import org.junit.Test;
 
@@ -11,38 +10,37 @@ import static org.junit.Assert.assertEquals;
  */
 public class TrackerTest {
   @Test
-  public void testReplaceSpacesByPluses() {
+  public void urlSpacesShouldBeTransformedToPluses() {
     String query = "слово слово слово слово   слово  слово словослово 64hgfh fghtr h rh 6h nbfghbf";
     String answer = Tracker.replaceSpacesByPluses(query);
     assertEquals("слово+слово+слово+слово+++слово++слово+словослово+64hgfh+fghtr+h+rh+6h+nbfghbf", answer);
   }
 
   @Test(expected=NullPointerException.class)
-  public void replaceSpacesByPlusesWithNullString() {
+  public void inSpacesToPlusesNullStringNotAllowed() {
     String query = null;
     // must throw NPE
-    String answer = Tracker.replaceSpacesByPluses(query);
+    Tracker.replaceSpacesByPluses(query);
   }
 
   @Test
-  public void replaceSpacesByPlusesWithZeroLengthString() {
+  public void inSpacesToPlusesZeroLengthStringAllowed() {
     String query = "";
     String answer = Tracker.replaceSpacesByPluses(query);
     assertEquals("", answer);
   }
 
   @Test
-  public void replaceSpacesByPlusesWithNoSpacesString() {
+  public void inSpacesToPlusesNoSpaceStringAllowed() {
     String query = "no_spaces_string";
     String answer = Tracker.replaceSpacesByPluses(query);
     assertEquals("String without spaces, so must be same", query, answer);
   }
 
   @Test
-  public void replaceSpacesByPlusesMoreThanOneSpaceInSuccession() {
+  public void inSpacesToPlusesMoreThanOneSpaceInSuccessionAllowed() {
     String request = "String  with  two   or   three   spaces";
-    ToshokanTracker tt = new ToshokanTracker();
-    String formedRegexp = tt.replaceSpacesByPluses(request);
+    String formedRegexp = Tracker.replaceSpacesByPluses(request);
     assertEquals("String++with++two+++or+++three+++spaces", formedRegexp);
   }
 }

@@ -12,7 +12,9 @@ import java.util.List;
 /**
  * @author i.orlov
  */
-public class ToshokanParser {
+public class ToshokanParser implements Parser {
+
+  @Override
   public List<SearchResult> getResults(URL url) {
     String xPathExpression = ".//div[@id='main']/table[2]//tr/td[2]/a";
     NodeList xmlResultTree = (NodeList) XMLUtil.getXMLResultTree(url, xPathExpression);

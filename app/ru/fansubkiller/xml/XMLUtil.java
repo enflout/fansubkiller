@@ -13,12 +13,12 @@ import java.net.URL;
  */
 
 public class XMLUtil {
-  public static Object getXMLResultTree(URL url, String filter) {
+  public static Object getXMLResultTree(URL url, String xPathExpression) {
     InputStream in = null;
     try {
       in = url.openStream();
       Document doc = getValidXHTMLDocument(in);
-      return applyXPathExpression(doc, filter);
+      return applyXPathExpression(doc, xPathExpression);
     } catch (MalformedURLException e) {
       e.printStackTrace();
     } catch (IOException e) {

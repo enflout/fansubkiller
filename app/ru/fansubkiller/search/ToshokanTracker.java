@@ -4,27 +4,28 @@ import ru.fansubkiller.content.SearchResult;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * @author i.orlov
  */
 public class ToshokanTracker extends Tracker {
-  public List<SearchResult> search(String searchRequest) {
+  public List<SearchResult> search(String searchedText) {
     try {
-      String pageHref = formSearchURL(searchRequest);
+      String pageHref = formSearchURL(searchedText);
       URL url = new URL(pageHref);
-      ToshokanParser parser = new ToshokanParser();
+      Parser parser = new ToshokanParser();
       return parser.getResults(url);
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }
-    return null;
+    return Collections.emptyList();
   }
 
   @Override
-  public String formSearchURL(String searchRequest) {
-    return getSearchEngineURL() + "?terms=" + replaceSpacesByPluses(searchRequest) + "&type=0&size_min=&size_max=&username=";
+  public String formSearchURL(String searchedText) {
+    return getSearchEngineURL() + "?terms=" + replaceSpacesByPluses(searchedText) + "&type=0&size_min=&size_max=&username=";
   }
 
   @Override
