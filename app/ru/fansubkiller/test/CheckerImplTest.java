@@ -2,8 +2,8 @@ package ru.fansubkiller.test;
 
 import models.Task;
 import org.junit.Test;
-import ru.fansubkiller.timer.Checker;
-import ru.fansubkiller.timer.CheckerImpl;
+import ru.fansubkiller.notify.Checker;
+import ru.fansubkiller.notify.CheckerImpl;
 
 import static org.easymock.EasyMock.*;
 

@@ -10,7 +10,7 @@ import play.db.jpa.Model;
 import ru.fansubkiller.content.SearchResult;
 import ru.fansubkiller.search.ToshokanTracker;
 import ru.fansubkiller.search.Tracker;
-import ru.fansubkiller.timer.CheckerRegistry;
+import ru.fansubkiller.notify.CheckerRegistry;
 
 import javax.persistence.Entity;
 import java.util.List;
