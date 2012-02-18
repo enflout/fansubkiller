@@ -1,4 +1,4 @@
-package ru.fansubkiller.timer;
+package ru.fansubkiller.notify;
 
 import models.Task;
 

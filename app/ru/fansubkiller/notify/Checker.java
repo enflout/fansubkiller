@@ -1,6 +1,4 @@
-package ru.fansubkiller.timer;
-
-import models.Task;
+package ru.fansubkiller.notify;
 
 /**
  * @author Ivan Orlov
