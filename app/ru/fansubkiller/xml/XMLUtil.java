@@ -32,6 +32,7 @@ public class XMLUtil {
 
   public static Document getValidXHTMLDocument(InputStream is) {
     Tidy tidy = new Tidy();
+    tidy.setShowWarnings(false);
     tidy.setXHTML(true);
     return tidy.parseDOM(is, null);
   }
