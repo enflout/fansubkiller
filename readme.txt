@@ -1,1 +1,1 @@
-Toshokan monitor
+Парсер торрент-трекера TokyoTosho (http://tokyotosho.info/) с системой уведомлений.
