@@ -12,6 +12,9 @@
     <orderEntry type="library" name="for tests" level="project" />
     <orderEntry type="library" name="JPA" level="project" />
     <orderEntry type="library" name="JTidy" level="project" />
+    <orderEntry type="library" name="Quartz" level="project" />
+    <orderEntry type="library" name="Commons Email" level="project" />
+    <orderEntry type="library" name="Java Mail API" level="project" />
   </component>
 </module>
 

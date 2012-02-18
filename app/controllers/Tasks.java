@@ -27,7 +27,6 @@ public class Tasks extends Controller {
     if (validation.hasErrors()) {
       render("@editTask", task);
     }
-    
     task.save();
     refreshPage();
   }
